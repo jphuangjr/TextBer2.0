@@ -36,3 +36,6 @@ bower_components/
 
 # Webstorm
 .idea
+
+# API keys
+auth/
