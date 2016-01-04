@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html ng-app='shortly'>
+<html ng-app='textber'>
 <head>
     <meta charset="utf-8" />
-    <title>Shortly</title>
-    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <title>Textber</title>
+    <!--<link rel="stylesheet" type="text/css" href="styles/style.css" />-->
 </head>
-<body>
+<body ng-controller="dataController">
 <h1>Textber</h1>
 <div>
     <a href = "/auth/uber"><button>Login</button></a>
+    <a href = "" ng-click = "login()"><button>Ng-Click Login</button></a>
     <!--<a href = "/#/shorten"><button>Shorten</button></a>-->
 </div>
 
@@ -18,10 +19,10 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
 
-<!--<script src="app/auth/auth.js"></script>-->
+<script src="app/datas/data.js"></script>
 <!--<script src="app/links/links.js"></script>-->
 <!--<script src="app/shorten/shorten.js"></script>-->
 <!--<script src="app/services/services.js"></script>-->
-<!--<script src="app/app.js"></script>-->
+<script src="app/app.js"></script>
 </body>
 </html>

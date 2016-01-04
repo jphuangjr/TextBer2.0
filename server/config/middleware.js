@@ -25,19 +25,29 @@ var auth = require('../../client/auth/authentification');
 // commonly found in a middleware stack.
 
 module.exports = function (app, express) {
+
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
   app.use(express.static(__dirname + '/../../client'));
+  app.use(passport.initialize());
+  app.use(passport.session());
+    passport.serializeUser(function (user, done){
+        done(null, user);
+    });
+    passport.deserializeUser(function (user, done){
+        done(null, user);
+    });
   passport.use(new UberStrategy({
         clientID: auth.clientID,
         clientSecret: auth.clientSecret,
         callbackURL: "http://localhost:8000/auth/uber/callback",
-        scope: "request"
+        scope: ['profile', 'request', 'request_receipt']
 
       },
       function(accessToken, refreshToken, profile, done){
-
+          profile.accessToken = accessToken;
+          return done(null, profile);
       }))
 };
 
