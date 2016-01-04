@@ -18,27 +18,40 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  UBER Text: Requesting a uber using SMS
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  UBER Text is designed for people that want to use Uber's services but lack a cell phone. 
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  Currently, Uber services are only accessible to people with a uber account. This product bridges that gap by allowing users who only have basic cell phone to use the Uber servies through SMS.
 
 ## Problem ##
   > Describe the problem your product solves.
+  UBER Text serves as the mediator between the customer and the Uber service. Users can register and link their Uber account to our service, allowing them to make a ride request by texting our servers.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  UBER Text makes use of a Nodejs Server and both the Uber and Twilio API to make, send, and recieve service requests.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  "Get a Uber without a smartphone"
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Steps:
+  1. Visit our website at ***WEBSITE NAME***
+  2. Link you exisiting Uber account
+  3. Text your starting address and ending address in the following format "startAddress:endAddress" to the number provided
+  4. Enjoy your uber ride!
+
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
