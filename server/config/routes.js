@@ -24,6 +24,9 @@ module.exports = function (app, express) {
         secret: "false"
     }));
 
+    app.get('/', function (request, response) {
+        response.render('index');
+    });
     app.get('/auth/uber',
         passport.authenticate('uber'));
 
