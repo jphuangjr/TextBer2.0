@@ -6,7 +6,7 @@ var databaseName = "temp" /*Database Name HERE*/
 ////////////////////////////////////////////////
 
 var app = express();
-app.set('port', 8000);
+app.set('port', (process.env.PORT || 8000));
 
 // connect to mongo database named in databaseName
 //mongoose.connect('mongodb://localhost/'+ databaseName);

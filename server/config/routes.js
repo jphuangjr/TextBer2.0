@@ -49,7 +49,7 @@ module.exports = function (app, express) {
             client.messages.create({
                 to: "+16502834692",
                 from: "+16506145695",
-                body: "~ Textber ~   Welcome to Textber: " + req.user.first_name + " " + req.user.last_name +". You are now logged in with Uber Account: "+ req.user.email +" and your Promo Code is: " + req.user.promo_code +" :)",
+                body: "~ Textber ~   Welcome to Textber: " + req.user.first_name + " " + req.user.last_name +". You are now logged in with Uber Account: "+ req.user.email +" || GET YOUR FIRST RIDE FREE WITH PROMO CODE: DKT48",
                 mediaUrl: "https://pbs.twimg.com/profile_images/443257735333675008/3oQBTiKh.jpeg"
             }, function(err, message) {
                 console.log(message.sid);
