@@ -12,8 +12,8 @@ var app = express();
 mongoose.connect('mongodb://localhost/'+ databaseName);
 
 // configure our server with all the middleware and routing
-require('./config/middleware.js')(app, express);
-require('./config/routes.js')(app, express);
+require('./server/config/middleware.js')(app, express);
+require('./server/config/routes.js')(app, express);
 
 app.listen(port, function(){
     console.log("******* SERVER STARTED: Listening on port " + port + " *******")
