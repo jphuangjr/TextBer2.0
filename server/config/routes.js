@@ -105,14 +105,7 @@ module.exports = function (app, express) {
     })
 
     app.post("/reqRide", function(req, res){
-        //uber.authorization({ refresh_token: auth.accessToken}, function(err, access_token, refresh_token){
-        //    if(err){
-        //        console.log("ERRRORED IN REQ RIDE:", err)
-        //    } else {
-        //        auth.accessToken2 = access_token
-        //        auth.accessToken = refresh_token
-        //    }
-        //})
+
         console.log(">>>>>>>> Access Token",auth.accessToken)
         //console.log(">>>>>>>> Access Token",auth.accessToken2)
         console.log(">>>>>>>> Server Token",auth.serverToken)
@@ -142,16 +135,28 @@ module.exports = function (app, express) {
 
                 }, function(err, res, body){
                     console.log("made post req")
+                    console.log(">>>>>>>>>>> RequestID", body.request_id)
+                    request({
+                        method:"GET",
+                        url: "https://sandbox-api.uber.com/v1/requests/" + body.request_id,
+                            headers : {
+                                'Content-Type': "application/json",
+                                'Authorization': "Bearer " + auth.accessToken
+                            }
+                    },
+                    function(err, res, body){
+                        console.log("BODYYYYY", body)
+                        body = JSON.parse(body)
+                        client.messages.create({
+                            to: "+16502834692",
+                            from: "+16506145695",
+                            body: "~ Textber ~   Your Ride is Coming! Your Eta is : " + body.eta + "mins, and your driver is: "+ body.driver +". Vehicle : "+ body.vehicle +". Current Surge Multiplier: " + body.surge_multiplier
+                            //mediaUrl: "https://pbs.twimg.com/profile_images/443257735333675008/3oQBTiKh.jpeg"
+                        }, function(err, message) {
+                            console.log(message.sid);
+                        });
+                    })
 
-                    //body = JSON.parse(body);
-                    console.log(">>>>>>>>>>> POST RESPONSE", body)
-                    client.messages.create({
-                        to: "+16502834692",
-                        from: "+16506145695",
-                        body: "~ Textber ~    " + body
-                    }, function(err, message) {
-                        console.log(message.sid);
-                    });
                 })
             })
         })
