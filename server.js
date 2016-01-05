@@ -1,12 +1,12 @@
 var express = require("express");
 var mongoose = require("mongoose");
-var port = process.env.PORT || 8000;
 
 /////////////////////////////////////////////////
 var databaseName = "temp" /*Database Name HERE*/
 ////////////////////////////////////////////////
 
 var app = express();
+app.set('port', (process.env.PORT || 8000));
 
 // connect to mongo database named in databaseName
 //mongoose.connect('mongodb://localhost/'+ databaseName);
@@ -15,8 +15,8 @@ var app = express();
 require('./server/config/middleware.js')(app, express);
 require('./server/config/routes.js')(app, express);
 
-app.listen(port, function(){
-    console.log("******* SERVER STARTED: Listening on port " + port + " *******")
+app.listen(app.get('port'), function(){
+    console.log("******* SERVER STARTED: Listening on port " + app.get('port') + " *******")
 });
 
 module.exports = app;
