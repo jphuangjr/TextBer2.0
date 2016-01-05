@@ -1,6 +1,6 @@
 var express = require("express");
 var mongoose = require("mongoose");
-var port = 8000;
+var port = process.env.PORT || 8000;
 
 /////////////////////////////////////////////////
 var databaseName = "temp" /*Database Name HERE*/
