@@ -1,8 +1,21 @@
 <div ng-app="textber.data">
     <h1 ng-controller="dataController">Logged IN</h1>
-    {{ data }}
-    <a href="/getPrices"><button>Get Prices</button></a>
-    <a href="/reqRide"><button>Request Ride</button></a>
+    <form action="/getPrices" method="POST">
+        <label for="addy3">Address 1</label>
+        <input id="addy3" type="text" name="addy1">
+        <label for="addy4">Address 2</label>
+        <input id= "addy4" type="text" name="addy2">
+        <input type="submit" value="Get Price Estimate">
+    </form>
+    <form action="/reqRide" method="POST">
+        <label for="addy1">Address 1</label>
+        <input id="addy1" type="text" name="addy1">
+        <label for="addy2">Address 2</label>
+        <input id="addy2" type="text" name="addy2">
+        <input type="submit" value="Request Ride">
+
+    </form>
+    <!--<a href="/reqRide"><button>Request Ride</button></a>-->
 
 
 </div>

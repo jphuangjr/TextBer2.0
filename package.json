@@ -15,6 +15,7 @@
     "jwt-simple": "^0.4.0",
     "mongoose": "^4.3.4",
     "morgan": "^1.6.1",
+    "node-geocoder": "^3.5.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "passport-uber": "0.0.1",
