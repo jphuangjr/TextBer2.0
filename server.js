@@ -9,7 +9,7 @@ var databaseName = "temp" /*Database Name HERE*/
 var app = express();
 
 // connect to mongo database named in databaseName
-mongoose.connect('mongodb://localhost/'+ databaseName);
+//mongoose.connect('mongodb://localhost/'+ databaseName);
 
 // configure our server with all the middleware and routing
 require('./server/config/middleware.js')(app, express);
