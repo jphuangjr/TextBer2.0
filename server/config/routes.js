@@ -5,6 +5,9 @@ var passport = require("passport");
 var request = require("request");
 var auth = require("../../client/auth/authentification")
 var session = require("express-session");
+var accountSid = 'AC929473a2cb1685807ff13435f9f96bf8';
+var authToken = '2462ccc8b59727f001265af824ad1471';
+var client = require('twilio')(accountSid, authToken)
 
 
 
@@ -27,7 +30,7 @@ module.exports = function (app, express) {
             res.redirect('/#/loggedIn');
         });
 
-    app.get("/uberRide", function(req, res){
+    app.get("/getPrices", function(req, res){
         console.log(">>>>>>>> Server Token",auth.serverToken)
 
         request({
@@ -45,7 +48,16 @@ module.exports = function (app, express) {
                 end_longitude: -122.4103922
             }
         }, function(err, res, body){
-            console.log(">>>>>>>>>>> POST REPONSE", body)
+
+            body = JSON.parse(body);
+            console.log(">>>>>>>>>>> POST RESPONSE", body.prices[0].estimate)
+            client.messages.create({
+                to: "+16502834692",
+                from: "+16506145695",
+                body: "Price Estimate: " + body.prices[0].estimate + ", Distance: " +body.prices[0].distance +"mi"
+            }, function(err, message) {
+                console.log(message.sid);
+            });
         })
     })
 

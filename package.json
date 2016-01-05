@@ -19,6 +19,7 @@
     "passport-facebook": "^2.0.0",
     "passport-uber": "0.0.1",
     "q": "^1.4.1",
-    "request": "^2.67.0"
+    "request": "^2.67.0",
+    "twilio": "^2.8.0"
   }
 }
