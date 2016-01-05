@@ -47,7 +47,6 @@ module.exports = function (app, express) {
       },
       function(accessToken, refreshToken, profile, done){
           profile.accessToken = accessToken;
-          auth.accessToken2 = accessToken;
           return done(null, profile);
       }))
 };

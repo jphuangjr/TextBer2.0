@@ -15,6 +15,15 @@ var extra = {
     formatter: null
 };
 var geocoder = require('node-geocoder')(geocodeProvider, httpAdapter, extra);
+var Uber = require('node-uber');
+
+var uber = new Uber({
+    client_id: auth.clientID,
+    client_secret: auth.clientSecret,
+    server_token: auth.serverToken,
+    redirect_uri: "http://localhost:8000/auth/uber/callback",
+    name: "Textber2"
+})
 
 
 
@@ -96,8 +105,16 @@ module.exports = function (app, express) {
     })
 
     app.post("/reqRide", function(req, res){
+        //uber.authorization({ refresh_token: auth.accessToken}, function(err, access_token, refresh_token){
+        //    if(err){
+        //        console.log("ERRRORED IN REQ RIDE:", err)
+        //    } else {
+        //        auth.accessToken2 = access_token
+        //        auth.accessToken = refresh_token
+        //    }
+        //})
         console.log(">>>>>>>> Access Token",auth.accessToken)
-        console.log(">>>>>>>> Access Token",auth.accessToken2)
+        //console.log(">>>>>>>> Access Token",auth.accessToken2)
         console.log(">>>>>>>> Server Token",auth.serverToken)
         var trip = [];
         var address1 = req.body.addy1 /*"948 Market Street, San Fransisco"*/;
@@ -112,27 +129,22 @@ module.exports = function (app, express) {
                 request({
                     method: "POST",
                     url: "https://sandbox-api.uber.com/v1/requests",
-                    headers: [{
-                        name: "Content-Type", value : "application/json" },{
-                        name: "Authorization", value: "Bearer " + auth.accessToken
-                    }],
-                    //headers : {
-                    //  'Content-Type': "application/json",
-                    //    'Authorization': "Bearer " + auth.accessToken
-                    //},
-                    form: {
-                        //server_token: auth.serverToken,
-                        product_id: "a1111c8c-c720-46c3-8534-2fcdd730040d",
+                    json: {
                         start_latitude: 37.471,
                         start_longitude: -122.2433,
                         end_latitude: 37.7856394,
                         end_longitude: -122.4103922
+                    },
+                    headers : {
+                      'Content-Type': "application/json",
+                        'Authorization': "Bearer " + auth.accessToken
                     }
+
                 }, function(err, res, body){
                     console.log("made post req")
 
-                    body = JSON.parse(body);
-                    console.log(">>>>>>>>>>> POST RESPONSE", body.message)
+                    //body = JSON.parse(body);
+                    console.log(">>>>>>>>>>> POST RESPONSE", body)
                     client.messages.create({
                         to: "+16502834692",
                         from: "+16506145695",
@@ -151,21 +163,6 @@ module.exports = function (app, express) {
 
 
 
-
-
-    //app.get('/:code', linksController.navToLink);
-    //
-    //app.post('/api/users/signin', userController.signin);
-    //app.post('/api/users/signup', userController.signup);
-    //app.get('/api/users/signedin', userController.checkAuth);
-
-    // authentication middleware used to decode token and made available on the request
-    // app.use('/api/links', helpers.decode);
-    //app.get('/api/links/', linksController.allLinks);
-    //app.post('/api/links/', linksController.newLink);
-    // app.post("/api/link/nav/", linksController.navToLink);
-
-
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
     app.use(helpers.errorLogger);
@@ -174,11 +171,3 @@ module.exports = function (app, express) {
 
 
 
-
-//
-//curl -F 'client_secret=YOUR_CLIENT_SECRET' \
-//-F 'client_id=cTs1o6JE06Qgb8_Qmyn2UEpn8Ea5XHKy' \
-//-F 'grant_type=authorization_code' \
-//-F 'redirect_uri=http://localhost:8000/auth/uber/callback' \
-//-F 'code=oaQvq92uWCUVH4neSfiX7FAuqSKm6X' \
-//https://login.uber.com/oauth/v2/token
